@@ -30,7 +30,7 @@ Ensure you have [Node.js](https://nodejs.org/) installed.
    npm install
    ```
 
-3. Start the app:
+3. Start the app (this script will start both the app and the server):
    ```sh
    npm run start
    ```
