@@ -1,0 +1,27 @@
+.form-container {
+  max-width: 600px;
+  margin-inline: auto;
+  margin-top: 2em;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2em;
+}
+.form__button {
+  display: block;
+  margin-top: 1em;
+  font-size: 1rem;
+  padding-block: 1em;
+  cursor: pointer;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 1rem;
+  color: var(--color-primary);
+  transition: all 0.3s;
+}
+
+.form__button:hover {
+  opacity: 0.8;
+}

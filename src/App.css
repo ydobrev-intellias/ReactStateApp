@@ -1,0 +1,24 @@
+:root {
+  --color-primary: #eeeeee;
+  --color-secondary: #393e46;
+  --color-accent: #b55400;
+  --bg-color: #222831;
+  --color-accent-hover: rgb(181, 84, 0, 0.7);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+
+  color: var(--color-secondary);
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
