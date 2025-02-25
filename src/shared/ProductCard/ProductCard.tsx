@@ -4,9 +4,10 @@ import { AppDispatch, RootState } from "../../state/store";
 import { addToCart, removeFromCart } from "../../state/slices/cartSlice";
 import { deleteProduct } from "../../state/slices/productSlice";
 import { CircleX } from "lucide-react";
+import Product from "../../types/Product";
 
 interface ProductCardProps {
-  product: any;
+  product: Product;
 }
 function ProductCard({ product }: ProductCardProps) {
   const dispatch = useDispatch<AppDispatch>();

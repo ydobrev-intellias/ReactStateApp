@@ -1,14 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import FormValues from "../../types/FormValues";
 import Product from "../../types/Product";
+import Status from "../../types/Status";
+import { JSON_SERVER_URL, PUBLIC_API_URL } from "../../constants";
 
-const JSON_SERVER_URL = "http://localhost:5000";
-const PUBLIC_API_URL = "https://fakestoreapi.com";
-
-enum Status {
-  PENDING = "PENDING",
-  IDLE = "IDLE",
-}
 interface InitialState {
   data: Array<any>;
   status: Status;
