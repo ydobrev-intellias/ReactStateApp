@@ -5,7 +5,7 @@ import Status from "../../types/Status";
 import { JSON_SERVER_URL, PUBLIC_API_URL } from "../../constants";
 
 interface InitialState {
-  data: Array<any>;
+  data: Array<Product>;
   status: Status;
 }
 
@@ -23,6 +23,8 @@ export const fetchProducts = createAsyncThunk(
       return jsonServerData;
     }
     const publicApiResponse = await fetch(`${PUBLIC_API_URL}/products`);
+    if (!publicApiResponse.ok) return;
+
     const publicApiData = (await publicApiResponse.json()).map(
       (product: Product) => ({
         ...product,
@@ -51,6 +53,7 @@ export const createProduct = createAsyncThunk(
   "products/createProduct",
   async (productData: FormValues) => {
     const response = await fetch(`${JSON_SERVER_URL}/products`);
+
     const products = await response.json();
 
     const product = await fetch(`${JSON_SERVER_URL}/products`, {

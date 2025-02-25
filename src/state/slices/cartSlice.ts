@@ -34,9 +34,14 @@ export const addToCart = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (productId: string) => {
+    const getResponse = await fetch(`${JSON_SERVER_URL}/cart/${productId}`);
+    if (!getResponse.ok) {
+      return;
+    }
     await fetch(`${JSON_SERVER_URL}/cart/${productId}`, {
       method: "DELETE",
     });
+
     return productId;
   }
 );
@@ -56,12 +61,14 @@ export const cartSlice = createSlice({
       .addCase(fetchCart.pending, (state) => {
         state.status = Status.PENDING;
       })
-      .addCase(addToCart.fulfilled, (state, action: any) => {
+      .addCase(addToCart.fulfilled, (state, action: PayloadAction<Product>) => {
         state.cart.push(action.payload);
       })
       .addCase(
         removeFromCart.fulfilled,
-        (state, action: PayloadAction<string>) => {
+        (state, action: PayloadAction<string | undefined>) => {
+          if (!action.payload) return;
+
           state.cart = state.cart.filter(
             (product) => product.id !== action.payload
           );
