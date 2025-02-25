@@ -10,7 +10,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  data: [],
+  data: new Array<Product>(),
   status: Status.IDLE,
 };
 

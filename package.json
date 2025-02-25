@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "rm -rf db && mkdir db && echo '{\"products\":[]}' > ./db/db.json && npx json-server ./db/db.json --port 5000",
+    "server": "rm -rf db && mkdir db && echo '{\"products\":[],\"cart\":[]}' > ./db/db.json && npx json-server ./db/db.json --port 5000",
     "start": "concurrently \"npm run server\" \"wait-on http://localhost:5000 && npm run dev\""
   },
   "dependencies": {

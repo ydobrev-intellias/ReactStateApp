@@ -2,11 +2,10 @@
 
 Product store where users can:
 
-- Browse and manage products
-- Add/remove products from the cart
 - Create and delete products
+- Add/remove products from the cart
 - The app runs at `http://localhost:5173/` and connects to a local JSON server at `http://localhost:5000/`.
-- Cart items are managed in the app state, not stored in the server.
+- Cart items and products are managed in the app state and persisted in the server.
 - Fully mobile responsive.
 
 ## Installation & Setup

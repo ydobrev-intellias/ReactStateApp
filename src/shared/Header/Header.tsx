@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { ShoppingCart, SquarePlus } from "lucide-react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../state/store";
+import { useEffect } from "react";
+import { fetchCart } from "../../state/slices/cartSlice";
 function Header() {
   const { cart } = useSelector((state: RootState) => state.cartReducer);
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
   return (
     <header className={styles.header}>
       <nav className={styles["header-nav"]}>

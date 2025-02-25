@@ -1,29 +1,75 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Product from "../../types/Product";
+import Status from "../../types/Status";
+import { JSON_SERVER_URL } from "../../constants";
 
 interface InitialState {
   cart: Array<Product>;
+  status: Status;
 }
 
 const initialState: InitialState = {
-  cart: [],
+  cart: new Array<Product>(),
+  status: Status.IDLE,
 };
+
+export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
+  const response = await fetch(`${JSON_SERVER_URL}/cart`);
+  const cart = await response.json();
+  return cart;
+});
+export const addToCart = createAsyncThunk(
+  "cart/addToCart",
+  async (product: Product) => {
+    await fetch(`${JSON_SERVER_URL}/cart`, {
+      body: JSON.stringify(product),
+      headers: {
+        "content-type": "application/json",
+      },
+      method: "POST",
+    });
+    return product;
+  }
+);
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async (productId: string) => {
+    await fetch(`${JSON_SERVER_URL}/cart/${productId}`, {
+      method: "DELETE",
+    });
+    return productId;
+  }
+);
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {
-    addToCart: (state, action) => {
-      state.cart.push(action.payload);
-    },
-    removeFromCart: (state, action) => {
-      state.cart = state.cart.filter(
-        (item: Product) => item.id != action.payload
-      );
-    },
-  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(
+        fetchCart.fulfilled,
+        (state, action: PayloadAction<Array<Product>>) => {
+          state.status = Status.IDLE;
+          state.cart = action.payload;
+        }
+      )
+      .addCase(fetchCart.pending, (state) => {
+        state.status = Status.PENDING;
+      })
+      .addCase(addToCart.fulfilled, (state, action: any) => {
+        state.cart.push(action.payload);
+      })
+      .addCase(
+        removeFromCart.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.cart = state.cart.filter(
+            (product) => product.id !== action.payload
+          );
+        }
+      ),
+  reducers: {},
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const {} = cartSlice.actions;
 
 export default cartSlice.reducer;

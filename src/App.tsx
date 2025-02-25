@@ -3,10 +3,11 @@ import "./App.css";
 import Layout from "./shared/Layout/Layout";
 import Header from "./shared/Header/Header";
 import { lazy, Suspense } from "react";
-import Loader from "./shared/Loader/Loader";
-import CreateProductPage from "./pages/CreateProductPage/CreateProductPage";
+import SuspenseLoader from "./shared/SuspenseLoader/SuspenseLoader";
 const ProductsPage = lazy(() => import("./pages/ProductsPage/ProductsPage"));
-
+const CreateProductPage = lazy(
+  () => import("./pages/CreateProductPage/CreateProductPage")
+);
 const CartPage = lazy(() => import("./pages/CartPage/CartPage"));
 
 function App() {
@@ -19,16 +20,23 @@ function App() {
             <Route
               index
               element={
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<SuspenseLoader />}>
                   <ProductsPage />
                 </Suspense>
               }
             />
-            <Route path="create" element={<CreateProductPage />} />
+            <Route
+              path="create"
+              element={
+                <Suspense fallback={<SuspenseLoader />}>
+                  <CreateProductPage />
+                </Suspense>
+              }
+            />
             <Route
               path="cart"
               element={
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<SuspenseLoader />}>
                   <CartPage />
                 </Suspense>
               }

@@ -4,6 +4,8 @@
   box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 1);
   display: flex;
   color: var(--color-primary);
+  position: relative;
+  z-index: 101;
 }
 .header-links {
   display: flex;

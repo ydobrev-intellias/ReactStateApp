@@ -2,12 +2,13 @@
   border: 5px solid var(--bg-color);
   border-bottom-color: var(--color-accent);
   border-radius: 50%;
-  width: 60px;
+  width: 3.5em;
   aspect-ratio: 1/1;
   animation: loading 0.5s linear infinite;
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 @keyframes loading {
   0% {

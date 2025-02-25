@@ -1,0 +1,7 @@
+.suspense-loader {
+  inset: 0;
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 1.45rem;
+}
